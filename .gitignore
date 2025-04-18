@@ -1,1 +1,23 @@
+# Ignore object files and build artifacts
+*.o
 client
+
+# Dependency files
+*.d
+
+# Logs
+*.log
+
+# Editor swap and backup files
+*~
+*.swp
+
+# VS Code and IDE directories
+.vscode/
+.idea/
+
+# macOS
+.DS_Store
+
+# ASIO headers
+include/
