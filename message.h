@@ -1,6 +1,7 @@
 #pragma once
 
 #include <iostream>
+#include "protocolOutlines.h"
 
 class Message{
 private:
@@ -14,4 +15,4 @@ public:
 
 	friend std::ostream& operator<<(std::ostream& os, const Message& message);
 	std::string encodeForBroadcast() const;
-}
+};

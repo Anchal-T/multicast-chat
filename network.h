@@ -7,7 +7,7 @@
 #include <iostream>
 #include <queue>
 #include <mutex>
-#include <message.h>
+#include "message.h"
 
 #define BROADCAST_PORT 2223
 #define BROADCAST_IP "239.255.255.250"
@@ -15,7 +15,7 @@
 
 class Broadcaster{
 	private:
-		int _broadcastPort
+		int _broadcastPort;
 	
 
 	public:
@@ -42,4 +42,4 @@ public:
 	void listen();
 
 	Message* getQueueMessage();
-}
+};
