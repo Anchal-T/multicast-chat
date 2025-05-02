@@ -26,7 +26,7 @@ std::string Message::getSenderIP() const
 
 std::ostream& operator<<(std::ostream& os, const Message& message)
 {
-    os << "[" << message.getSenderName() << "] " << message.getContent();
+    os << message.encodeForBroadcast();
     return os;
 }
 

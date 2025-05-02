@@ -13,8 +13,12 @@ void Broadcaster::broadcastMessage(const Message message) const
   {
     asio::io_context io_context;
     asio::ip::udp::socket socket(io_context, asio::ip::udp::endpoint(asio::ip::udp::v4(), 0));
+    socket.set_option(asio::socket_base::broadcast(true));
+    
     socket.set_option(asio::socket_base::reuse_address(true));
+    
     asio::ip::udp::endpoint broadcast_endpoint(asio::ip::make_address(BROADCAST_IP), _broadcastPort);
+    
     socket.send_to(asio::buffer(message.encodeForBroadcast()), broadcast_endpoint);
   }
   catch (std::exception &e)
