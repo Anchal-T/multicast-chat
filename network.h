@@ -21,12 +21,12 @@ class Broadcaster{
 	public:
 		Broadcaster(const int broadcastPort);
 		virtual ~Broadcaster();
-		void BroadcastMessage(const Message message) const;
+		void broadcastMessage(const Message message) const;
 };
 
 class Receiver{
 private:
-	int _recievePort;
+	int _receivePort;
 	std::queue<Message*> _messageQueue;
 	std::mutex _messageQueueMutex;
 
@@ -34,7 +34,7 @@ private:
 	asio::ip::udp::socket _socket;
 
 public:
-	Receiver(const int recieverPort);
+	Receiver(const int receiverPort);
 	virtual ~Receiver();
 
 	void ParseMessage(const std::string& udpData, std::string& name, std::string& context);

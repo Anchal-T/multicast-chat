@@ -3,7 +3,7 @@
 CC = g++
 CFLAGS = -std=c++14 -Iinclude -pthread -Wall -O2
 
-SRCS = client.cpp
+SRCS = client.cpp network.cpp message.cpp
 OBJS = $(SRCS:.cpp=.o)
 TARGET = client
 
