@@ -3,7 +3,7 @@
 CC = g++
 CFLAGS = -std=c++14 -Iinclude -pthread -Wall -O2
 
-SRCS = client.cpp network.cpp message.cpp
+SRCS = client.cpp network.cpp message.cpp 
 OBJS = $(SRCS:.cpp=.o)
 TARGET = client
 
@@ -12,7 +12,7 @@ all: $(TARGET)
 $(TARGET): $(OBJS)
 	$(CC) $(CFLAGS) -o $@ $^
 
-%.o: %.cpp
+%.o: %.cpps
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
