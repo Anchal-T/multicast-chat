@@ -1,7 +1,7 @@
 # Ignore object files and build artifacts
 *.o
 client
-
+test
 # Dependency files
 *.d
 
@@ -18,6 +18,3 @@ client
 
 # macOS
 .DS_Store
-
-# ASIO headers
-include/
