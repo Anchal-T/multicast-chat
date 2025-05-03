@@ -17,6 +17,9 @@ void Broadcaster::broadcastMessage(const Message message) const
     
     socket.set_option(asio::socket_base::reuse_address(true));
     
+    // Enable multicast loopback for local testing
+    socket.set_option(asio::ip::multicast::enable_loopback(true));
+    
     asio::ip::udp::endpoint broadcast_endpoint(asio::ip::make_address(BROADCAST_IP), _broadcastPort);
     
     socket.send_to(asio::buffer(message.encodeForBroadcast()), broadcast_endpoint);
@@ -28,10 +31,24 @@ void Broadcaster::broadcastMessage(const Message message) const
 }
 
 Receiver::Receiver(const int receiverPort)
-    : _receivePort(receiverPort), _socket(_io_context, asio::ip::udp::endpoint(asio::ip::udp::v4(), receiverPort))
+    : _receivePort(receiverPort), _io_context(), _socket(_io_context)
 {
-  asio::ip::address multicast_address = asio::ip::make_address(BROADCAST_IP);
-  _socket.set_option(asio::ip::multicast::join_group(multicast_address));
+    // Create the socket without binding it initially
+    _socket.open(asio::ip::udp::v4());
+    
+    // Set reuse_address BEFORE binding (this is critical)
+    _socket.set_option(asio::socket_base::reuse_address(true));
+    
+    // Now bind to the endpoint
+    asio::ip::udp::endpoint listen_endpoint(asio::ip::address_v4::any(), _receivePort);
+    _socket.bind(listen_endpoint);
+    
+    // Join the multicast group
+    asio::ip::address multicast_address = asio::ip::make_address(BROADCAST_IP);
+    _socket.set_option(asio::ip::multicast::join_group(multicast_address));
+    
+    // Enable multicast loopback for local testing
+    _socket.set_option(asio::ip::multicast::enable_loopback(true));
 }
 
 Receiver::~Receiver()
