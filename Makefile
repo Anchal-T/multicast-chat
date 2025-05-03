@@ -12,7 +12,7 @@ all: $(TARGET)
 $(TARGET): $(OBJS)
 	$(CC) $(CFLAGS) -o $@ $^
 
-%.o: %.cpps
+%.o: %.cpp
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:

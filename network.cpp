@@ -4,7 +4,7 @@ Broadcaster::Broadcaster(const int broadcastPort)
 {
   this->_broadcastPort = broadcastPort;
 }
-
+//destroyer
 Broadcaster::~Broadcaster() {}
 
 void Broadcaster::broadcastMessage(const Message message) const
